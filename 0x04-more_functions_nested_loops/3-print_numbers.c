@@ -1,4 +1,4 @@
-int _putchar(char);
+#include "main.h"
 
 /**
  * print_numbers - print number between 0 to 9
