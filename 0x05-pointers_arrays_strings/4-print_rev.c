@@ -22,9 +22,9 @@ void print_rev(char *s)
 
 	/* print reverse string */
 
-	for (j = 0; j <= i; j++)
+	for (j = i - 1; j >= 0; j--)
 	{
-		_putchar(s[i - j]);
+		_putchar(s[j]);
 	}
 	_putchar('\n');
 }
