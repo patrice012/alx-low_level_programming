@@ -15,14 +15,12 @@ unsigned int _strspn(char *s, char *accept)
 {
 	unsigned int i, j, checker;
 
-	/* loop throught all chararcter of s */
-	for(i = 0; s[i] != '\0'; i++)
+	for (i = 0; s[i] != '\0'; i++)
 	{
 		checker = 0;
-		/*loop throught all chararacter of sub-string*/
+
 		for (j = 0; accept[j] != '\0'; j++)
 		{
-			/* if the string char is in sub-string */
 			if (s[i] == accept[j])
 			{
 				checker = 1;
@@ -34,5 +32,5 @@ unsigned int _strspn(char *s, char *accept)
 			return (i);
 		}
 	}
-	return(0);
+	return (0);
 }
