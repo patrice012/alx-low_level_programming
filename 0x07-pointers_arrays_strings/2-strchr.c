@@ -12,8 +12,9 @@ char *_strchr(char *s, char c)
 	int i;
 
 	i = 0;
-	/* while the current character and c are 
-	 * diffenrent then continue 
+	/*
+	 * while the current character and c are
+	 * diffenrent then continue
 	 */
 	while (s[i] != c)
 	{
