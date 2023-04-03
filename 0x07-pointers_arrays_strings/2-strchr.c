@@ -15,7 +15,7 @@ char *_strchr(char *s, char c)
 	i = 0;
 	/*
 	 * while the current character and c are
-	 * diffenrent then continue
+	 * not the same then continue
 	 */
 	while (s[i] != c)
 	{
