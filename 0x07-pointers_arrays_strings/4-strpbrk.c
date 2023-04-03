@@ -23,11 +23,8 @@ char *_strpbrk(char *s, char *accept)
 				return (&s[i]);
 			j++;
 		}
-
-		if (s[i] == '\0')
-			return (NULL);
 		i++;
 	}
 
-	return (0);
+	return (NULL);
 }
