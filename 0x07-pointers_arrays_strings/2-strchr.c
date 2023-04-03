@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stddef.h>
 
 /**
   * _strchr - function that locates a character in a string
@@ -18,6 +19,9 @@ char *_strchr(char *s, char c)
 	 */
 	while (s[i] != c)
 	{
+		/* return NULL if it's the last character */
+		if (s[i] == '\0')
+			return (NULL);
 		i++;
 	}
 	/* return the memory address of the first occurrence */
