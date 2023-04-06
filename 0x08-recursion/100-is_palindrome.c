@@ -41,6 +41,7 @@ int helper(char *s, int len, int i)
 int is_palindrome(char *s)
 {
 	int len = get_length(s);
+
 	if (len <= 1)
 		return (1);
 	return (helper(s, len, 0));
