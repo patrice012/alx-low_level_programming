@@ -1,6 +1,3 @@
-`IDENTIFY ERROR`![image](https://user-images.githubusercontent.com/105258746/190832836-b113fa0f-e26f-4db1-b8c5-d094c3dfd0a7.png) `ANALYZE ERROR`
-
-
 Debugging is the process of detecting and removing of existing and potential errors (also called as 'bugs') in a software code that can cause it to behave unexpectedly or crash.
 `YOU HAVE TO CRAETE YOUR PROTOTYPE ON YOUR main.h file FOR YOUR CODES TO WORK`
 
@@ -26,7 +23,7 @@ int main(void)
 ```
 Based on the `main.c` file above, create a file named `0-main.c.` This file must test that the function positive_or_negative() gives the correct output when given a case of 0.
 
-You are not coding the solution / function, you’re just testing it! However, you can adapt your function from 0x01. C - Variables, [if, else, while - Task #0 to compile with this main file to test locally.](https://github.com/Lordwill1/alx-low_level_programming/blob/master/0x01-variables_if_else_while/0-positive_or_negative.c)
+You are not coding the solution / function, you’re just testing it! However, you can adapt your function from 0x01. C - Variables, [if, else, while - Task #0 to compile with this main file to test locally.]
 
 ## File: 1-main.c
 Copy this main file. Comment out (don’t delete it!) the part of the code that is causing the output to go into an infinite loop.
@@ -129,8 +126,6 @@ int main(void)
 }
 ```
 
-* Code sample 2 (You need knowledge on logic truth table)
-![image](https://user-images.githubusercontent.com/105258746/190833251-a0bc604c-af0d-468d-884e-53387e3c6a18.png)
 
 ```
 #include <stdio.h>

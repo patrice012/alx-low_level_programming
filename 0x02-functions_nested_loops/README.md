@@ -1,9 +1,10 @@
-# PROJECT 0x02. C - Functions, nested loops
-![image](https://user-images.githubusercontent.com/105258746/189934273-f596e713-d5a1-4ab2-b623-75094e5c9b0e.png)
+# PROJECT 0x02. C - Functions, nested loops ALX AFRCA
+
 #### Nested loop means a loop statement inside another loop statement. That is why nested loops are also called as “loop inside loop"
 `(A nested loop is a loop inside the body of another loop)`
 
 - Note: The prototypes of all your functions and the prototype of the function _putchar should be included in your header file called main.h
+
 ~ You have to start by creating your `main.h` first. (The resources is below for your reference)
 
 ## ** File `main.h` is the header file containing all the function prototypes used in this project... >>>> THIS FILE IS VERY IMPORTANT
@@ -45,10 +46,3 @@ File: `_putchar.c` contains the _putchar() function definition.
 
 #### ===> File `104-fibonacci.c` is a program that finds and prints the first 98 Fibonacci numbers, starting with 1 and 2, followed by a new line.
 
-# Resources
-#### Read or watch:
-- [Nested while loops](https://www.youtube.com/watch?v=Z3iGeQ1gIss)
-- [C - Functions](https://www.tutorialspoint.com/cprogramming/c_functions.htm)
-- [Learning to Program in C (Part 06) `stop at 14:00`](https://www.youtube.com/watch?v=qMlnFwYdqIw)
-- [What is the purpose of a function prototype?](https://www.geeksforgeeks.org/what-is-the-purpose-of-a-function-prototype/)
-- [C - Header Files `stop before the “Once-Only Headers” paragraph`](https://www.tutorialspoint.com/cprogramming/c_header_files.htm)
