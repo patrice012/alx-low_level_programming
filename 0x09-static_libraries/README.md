@@ -9,7 +9,7 @@ Basic usage of ar, ranlib, nm
 ### 0.[A library is not a luxury but one of the necessities of life](https://github.com/patrice012/alx-low_level_programming/tree/main/0x09-static_libraries)
 * Functions;
 `
- int _putchar(char c);<br>
+ int _putchar(char c);
  int _islower(int c);
  int _isalpha(int c);
  int _abs(int n);
@@ -40,3 +40,27 @@ Basic usage of ar, ranlib, nm
 * Compile the main code to test our static library this way: `gcc -std=gnu89 main.c -L. -lmy -o quote`
 
 if you like you can execute the program `./quote `
+
+**Note** In creating a static library
+    * gcc -c *.c > This converts .c files to .o (object) files
+    * ar rc libmy.a *.o > This creates the static library "Libmy.a"
+    * ar -t libmy.a > This lists all files in libmy.a
+
+
+### 1. [Without libraries what have we? We have no past and no future]https://github.com/patrice012/alx-low_level_programming/tree/main/0x09-static_libraries)
+
+**TOPIC**
+
+Create a script called create_static_lib.sh that creates a static library called liball.a from all the .c files that are in the current directory.
+
+### STEPS
+
+1. Create `create_static_lib.sh` file usin Vi, Vim or other text editor
+2. open `create_static_lib.sh` and puts all following lines
+    _shebang_ > `!#/bin/bash`
+    *compile without linking files* > `gcc -c *.c`
+    *create liball.a archive using all objects files* > `ar rc liball.a *.o`
+    *index liball.a* > `ranlib liball.a`
+3. Exit file and type in command line `chmod o+x create_static_lib.sh`.
+    this command will make `create_static_lib.sh` file executable for all users
+4. Type `./create_static_lib.sh` for final result
