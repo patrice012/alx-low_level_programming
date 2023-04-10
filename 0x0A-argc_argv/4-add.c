@@ -4,7 +4,7 @@
 #include "main.h"
 
 /**
- * main -  a program that multiplies two numbers.
+ * main -   a program that adds positive numbers.
  * @argc: number of arguments
  * @argv: array of arguments
  * Return: Always 0 (Success)
@@ -13,13 +13,25 @@
 
 int main(int argc, char *argv[])
 {
-	if (argc < 2)
+	int  i;
+	int sum = 0;
+
+	if (argc == 1)
 	{
-		printf("Error \n");
+		printf("0\n");
 		return (1);
 	}
-	else
-		printf("%d\n", atoi(argv[argc - 2]) * atoi(argv[argc - 1]));
+
+	for (i = 1; i < argc; i++)
+	{
+		if (*argv[i] < '0' || *argv[i] > '9')
+		{
+			printf("Error\n");
+			return (1);
+		}
+		sum += atoi(argv[i]);
+	}
+	printf("%d\n", sum);
 	return (EXIT_SUCCESS);
 
 }
