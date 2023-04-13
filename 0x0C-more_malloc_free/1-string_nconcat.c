@@ -33,7 +33,6 @@ char *_copy(char *s1, char *s2, char *s3, int n)
 
 	/* get length */
 	len1 = _len(s1);
-	/*len2 = _len(s2);*/
 
 	/* copy s1 */
 	for (i = 0; i < len1; i++)
