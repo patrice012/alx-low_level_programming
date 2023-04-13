@@ -11,6 +11,8 @@ void *malloc_checked(unsigned int b)
 	void *addr = (void *) malloc(b);
 
 	if (addr == NULL)
+	{
 		exit(98);
+	}
 	return (addr);
 }
