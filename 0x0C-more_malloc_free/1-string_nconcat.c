@@ -6,6 +6,7 @@
   * @str: parameter of type char *.
   * Return: int .
  */
+
 int _len(char *str)
 {
 	if (*str == '\0')
@@ -14,6 +15,46 @@ int _len(char *str)
 	}
 	return (1 + _len(str + 1));
 }
+
+
+/**
+  * _copy - copy str1, str2 in str3
+  * @s1: first string
+  * @s2: second string
+  * @s3: copy string
+  * @n: number of bytes to copy
+  * Return: str3
+ */
+
+
+char *_copy(char *s1, char *s2, char *s3, int n)
+{
+	int i, j, len1 = 0;
+
+	/* get length */
+	len1 = _len(s1);
+	/*len2 = _len(s2);*/
+
+	/* copy s1 */
+	for (i = 0; i < len1; i++)
+	{
+		*(s3 + i) = *(s1 + i);
+	}
+
+	/* copy s2 */
+	for (j = 0; j < n; j++)
+	{
+		if (s2[j] == '\0')
+		{
+			break;
+		}
+		*(s3 + i + j) = *(s2 + j);
+	}
+	s3[i + j] = '\0';
+
+	return (s3);
+}
+
 /**
   * string_nconcat - function that concatenates two strings.
   * @s1: first string parameter
@@ -24,7 +65,7 @@ int _len(char *str)
 
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	unsigned int len1, len2, len3, i, j;
+	unsigned int len1, len2, len3;
 	char *s3;
 
 	if (s1 == NULL)
@@ -32,7 +73,6 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	if (s2 == NULL)
 		s2 = "";
 
-	/* get length */
 	len1 = _len(s1);
 	len2 = _len(s2);
 
@@ -47,23 +87,5 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	if (s3 == NULL)
 		return (0);
 
-	/* copy s1 */
-	for (i = 0; i < len1; i++)
-	{
-		*(s3 + i) = *(s1 + i);
-	}
-
-
-	/* copy s2 */
-	for (j = 0; j < len3 - len1; j++)
-	{
-		if (s2[j] == '\0')
-		{
-			break;
-		}
-		*(s3 + i + j) = *(s2 + j);
-	}
-	s3[i + j] = '\0';
-
-	return (s3);
+	return (_copy(s1, s2, s3, n));
 }
