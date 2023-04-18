@@ -2,15 +2,12 @@
 #include "dog.h"
 
 /**
- * main - check the code
- *
- * Return: Always 0
+  * main - The entry point of the program
+  * Return: int .
  */
-
 int main(void)
 {
 	struct dog my_dog;
-
 	my_dog.name = "Poppy";
 	my_dog.age = 3.5;
 	my_dog.owner = "Bob";
