@@ -43,7 +43,7 @@ char *_strstr(char *haystack, char *needle);
 
 if you like you can execute the program `./quote `
 
-**Note** In creating a static library  
+**Note** Create a static library  
 
     * gcc -c *.c > This converts .c files to .o (object) files  
 
