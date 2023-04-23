@@ -1,11 +1,11 @@
 #include "3-calc.h"
 
 /**
-  * main - The entry point of the program
-  * @argc: parameter of type int .
-  * @argv: parameter of type char *.
-  * Return: int .
- */
+* main - The entry point of the program
+* @argc: parameter of type int .
+* @argv: parameter of type char *.
+* Return: int .
+*/
 int main(int argc, char *argv[])
 {
 	int arg1, arg2, result;
