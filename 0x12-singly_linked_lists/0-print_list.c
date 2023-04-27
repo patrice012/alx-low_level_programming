@@ -17,7 +17,7 @@ size_t print_list(const list_t *h)
 	int len, i = 0;
 
 	if (!h)
-		return (-1);
+		return (0);
 
 	do {
 		len = h->str ? h->len : 0;
