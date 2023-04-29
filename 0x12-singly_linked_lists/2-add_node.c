@@ -4,7 +4,7 @@
 
 
 /**
-  * _get_len - return the lenght of the input
+  * _get_len - return the length of the input
   * @str: pointer to char
   * Return: int
   */

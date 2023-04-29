@@ -16,6 +16,6 @@ File 100-is_palindrome.c is a function that returns 1 if a string is a palindrom
 
 File 101-wildcmp.c is a function that compares two strings and returns 1 if the strings can be considered identical, otherwise return 0. It uses the concept of wildcards.
 
-File _putchar.c is a file containing the _putchar function.
+File \_putchar.c is a file containing the \_putchar function.
 
 File main.h is the header file containing the function prototypes.
