@@ -2,7 +2,7 @@
 
 
 /**
-  * list_len - return the lenght of the input
+  * list_len - return the length of the input
   * @h: pointer to struct
   * Return: int
   */

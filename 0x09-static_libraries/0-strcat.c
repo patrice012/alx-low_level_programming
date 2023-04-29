@@ -10,7 +10,7 @@
 
 char *_strcat(char *dest, char *src)
 {
-	/* get the lenght of dest */
+	/* get the length of dest */
 
 	int i = 0;
 	int j = 0;
