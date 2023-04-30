@@ -2,7 +2,7 @@
 
 
 /**
-  * add_nodeint_end - function that adds a new node at the end of a listint_t list.
+  * add_nodeint_end - adds a new node at the end of a listint_t list.
   * @head: pointer to listint_t struct
   * @n: input element data type
   * Return: the new element
