@@ -39,7 +39,7 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 	}
 
 	/* if i < index => add to the end of the list */
-	if (i < idx && temp->next == NULL)
+	if (i < (idx - 1) && temp->next == NULL)
 	{
 		temp->next = new;
 	}
