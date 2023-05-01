@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "lists.h"
 
-void _test(listint_t **head);
+void _test(listint_t *head);
 
 
 /**
@@ -46,7 +46,7 @@ int main(void)
 	print_listint(head);
 	printf("-----------------\n");
 
-	_test(&head);
+	/*_test(head);*/
 
 	print_listint(head);
 	return (0);
@@ -60,7 +60,7 @@ int main(void)
   */
 
 
-void _test(listint_t **head)
+void _test(listint_t *head)
 {
 	delete_nodeint_at_index(&head, 0);
 	print_listint(head);
