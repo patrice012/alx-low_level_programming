@@ -37,8 +37,17 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 		temp = temp->next;
 		i++;
 	}
-	new->next = temp->next;
-	temp->next = new;
+
+	/* if i < index => add to the end of the list */
+	if (i < idx && temp->next == NULL)
+	{
+		temp->next = new;
+	}
+	else
+	{
+		new->next = temp->next;
+		temp->next = new;
+	}
 
 	return (new);
 }
