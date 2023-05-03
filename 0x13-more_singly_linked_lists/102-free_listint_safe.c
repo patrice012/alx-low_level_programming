@@ -24,13 +24,13 @@ size_t free_listint_safe(listint_t **h)
 			i++;
 			*h = temp;
 		}
-		else 
+		else
 		{
 			free(*h);
 			i++;
 			break;
 		}
 	}
-	*h =NULL;
+	*h = NULL;
 	return (i);
 }
