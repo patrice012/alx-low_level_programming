@@ -11,6 +11,12 @@ void print_binary(unsigned long int n)
 {
 	int temp, len = 0;
 
+	if (n == 0)
+	{
+		printf("0");
+		return;
+	}
+
 	temp = n;
 
 	/* make right shift until number = 0 */
