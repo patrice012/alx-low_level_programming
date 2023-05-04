@@ -24,8 +24,7 @@ unsigned int binary_to_uint(const char *b)
 	while (*b != '\0')
 	{
 		/*
-		 * convert the char to integer => (*b - '0') and raising the base to the
-		 * power of len - 1
+		 * convert the char to integer => (*b - '0')
 		 */
 		sum += ((*b) - '0') << (len - 1);
 		len -= 1;

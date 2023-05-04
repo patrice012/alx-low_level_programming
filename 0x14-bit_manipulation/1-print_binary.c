@@ -10,10 +10,11 @@
 void print_binary(unsigned long int n)
 {
 	int temp, len = 0;
+	char ptr;
 
 	if (n == 0)
 	{
-		printf("0");
+		_putchar('0');
 		return;
 	}
 
@@ -27,7 +28,8 @@ void print_binary(unsigned long int n)
 
 	while (len >= 0)
 	{
-		printf("%ld", (n >> len) & 1);
+		ptr = '0' + ((n >> len) & 1);
+		_putchar(ptr);
 		len--;
 	}
 }
