@@ -20,6 +20,7 @@ int main(void)
 	print_binary((1 << 10) + 1);
 	printf("\n");
 	print_binary(954372342312);
+	printf("\n");
 	print_binary(ULONG_MAX);
 	return (0);
 }
