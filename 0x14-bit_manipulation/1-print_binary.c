@@ -20,10 +20,14 @@ void print_binary(unsigned long int n)
 
 	temp = n;
 
-	/* make right shift until number = 0 */
-	while (((temp >>= 1) > 0))
+	/* 
+	 * make right shift until number = 0
+	 * count the number of bits needed to represent the input number in binary.
+	 */
+	while ((temp >> 1) > 0)
 	{
 		len += 1;
+		temp = temp >> 1;
 	}
 
 	while (len >= 0)
