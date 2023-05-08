@@ -20,10 +20,9 @@ int append_text_to_file(const char *filename, char *text_content)
 		for (len = 0; text_content[len];)
 			len++;
 	}
-	else
-		return (-1);
 
 	b_open = open(filename, O_WRONLY | O_APPEND);
+	/* check write permissions if we open the file */
 	if (b_open == -1 || access(filename, W_OK) == -1)
 		return (-1);
 
