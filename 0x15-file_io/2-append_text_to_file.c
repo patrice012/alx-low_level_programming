@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
-  * create_file - a function that creates a file.
+  * append_text_to_file - appends text at the end of a file.
   * @filename: filename is the name of the file
   * @text_content: content to append
   * Return: 1 on success and -1 on failure
   */
 
-int create_file(const char *filename, char *text_content)
+int append_text_to_file(const char *filename, char *text_content)
 {
 	int b_open, b_write, len = 0;
 
@@ -20,10 +20,13 @@ int create_file(const char *filename, char *text_content)
 		for (len = 0; text_content[len];)
 			len++;
 	}
+	else
+		return (-1);
 
-	b_open = open(filename, O_RDWR | O_TRUNC);
-	if (b_open == -1)
-		b_open = open(filename, O_CREAT | O_RDWR, 0600);
+	b_open = open(filename, O_WRONLY | O_APPEND);
+	if (b_open == -1 || access(filename, W_OK) == -1)
+		return (-1);
+
 	b_write = write(b_open, text_content, len);
 
 	if (b_open == -1 || b_write == -1)
