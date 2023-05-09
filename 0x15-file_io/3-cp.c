@@ -11,18 +11,18 @@
  * Return: Nothing
  */
 
-void print_error(char *file,char *msg, int code)
+void print_error(char *file, char *msg, int code)
 {
 	if (file)
-		dprintf(STDERR_FILENO,"%s %s",msg , file);
+		dprintf(STDERR_FILENO, "%s %s", msg, file);
 	else
-		dprintf(STDERR_FILENO,"%s",msg);
+		dprintf(STDERR_FILENO, "%s", msg);
 	exit(code);
 }
 
 
 /**
- * create_buffer - Allocates 1024 bytes for a buffer.
+ * _buffer - Allocates 1024 bytes for a buffer.
  * @file: The name of the file buffer is storing chars for.
  * @max_size: buffer max size
  * Return: A pointer to the newly-allocated buffer.
@@ -36,6 +36,7 @@ char *_buffer(char *file, int max_size)
 	if (buffer == NULL)
 	{
 		char *msg = "Error: Can't write to %s\n";
+
 		print_error(file, msg, 99);
 
 	}
@@ -71,14 +72,12 @@ void close_file(int fd)
  */
 int main(int argc, char *argv[])
 {
-	int from, to, r, w;
-	char *buffer;
-	int max_size = 1024;
-	char *msg;
+	int from, to, r, w, max_size = 1024;
+	char *buffer, *msg;
+
 	if (argc != 3)
 	{
-		msg =  "Usage: cp file_from file_to\n";
-		print_error(NULL, msg, 97);
+		print_error(NULL, "Usage: cp file_from file_to\n", 97);
 	}
 
 	buffer = _buffer(argv[2], max_size);
@@ -92,8 +91,7 @@ int main(int argc, char *argv[])
 		if (from == -1 || r == -1)
 		{
 			free(buffer);
-			msg = "Error: Can't read from file %s\n";
-			print_error(argv[1], msg, 98);
+			print_error(argv[1], "Error: Can't read from file %s\n", 98);
 		}
 
 		w = write(to, buffer, r);
