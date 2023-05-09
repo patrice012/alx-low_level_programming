@@ -55,13 +55,13 @@ void check(int value, char *filename, int error_code)
 
 	if (error_code == 98)
 	{
-		msg = "Error: Can't read from file ";
+		msg = "Error: Can't read from file";
 		print_error(filename, msg, error_code);
 
 	}
 	else if (error_code == 99)
 	{
-		msg = "Error: Can't write to ";
+		msg = "Error: Can't write to";
 		print_error(filename, msg, error_code);
 	}
 }
@@ -85,7 +85,7 @@ void copy_file(char *file_from, char *file_to)
 	buffer = (char *)malloc(sizeof(char) * max_size);
 	if (buffer == NULL)
 	{
-		char *msg = "Error: Can't write to %s\n";
+		char *msg = "Error: Can't write to";
 
 		print_error(file_to, msg, 99);
 	}
