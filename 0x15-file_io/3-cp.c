@@ -14,35 +14,12 @@
 void print_error(char *file, char *msg, int code)
 {
 	if (file)
-		dprintf(STDERR_FILENO, "%s %s", msg, file);
+		dprintf(STDERR_FILENO, "%s %s\n", msg, file);
 	else
-		dprintf(STDERR_FILENO, "%s", msg);
+		dprintf(STDERR_FILENO, "%s\n", msg);
 	exit(code);
 }
 
-
-/**
- * _buffer - Allocates 1024 bytes for a buffer.
- * @file: The name of the file buffer is storing chars for.
- * @max_size: buffer max size
- * Return: A pointer to the newly-allocated buffer.
- */
-char *_buffer(char *file, int max_size)
-{
-	char *buffer;
-
-	buffer = malloc(sizeof(char) * max_size);
-
-	if (buffer == NULL)
-	{
-		char *msg = "Error: Can't write to %s\n";
-
-		print_error(file, msg, 99);
-
-	}
-
-	return (buffer);
-}
 
 /**
  * close_file - Closes file descriptors.
@@ -53,15 +30,92 @@ void close_file(int fd)
 	int c;
 
 	c = close(fd);
-
 	if (c == -1)
 	{
-		/*char *msg =  "Error: Can't close fd %d\n";*/
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 		exit(100);
-
-		/* print_error(fd, msg, 100);*/
 	}
+}
+
+
+/**
+ * check - checks for errors
+ *
+ * @value: flag
+ * @filename: filename to print in error message
+ * @error_code: error code
+ * Return: void
+ */
+void check(int value, char *filename, int error_code)
+{
+	char *msg;
+
+	if (value != -1)
+		return;
+
+	if (error_code == 98)
+	{
+		msg = "Error: Can't read from file ";
+		print_error(filename, msg, error_code);
+
+	}
+	else if (error_code == 99)
+	{
+		msg = "Error: Can't write to ";
+		print_error(filename, msg, error_code);
+	}
+}
+
+
+/**
+ * copy_file - copy file_from content to file_to
+ *
+ * @file_from: filename of original file
+ * @file_to: filename of new file
+ *
+ * Return: void
+ */
+void copy_file(char *file_from, char *file_to)
+{
+	char *buffer;
+	int fd_from, fd_to, max_size = 1024, w, r;
+	mode_t file_perm;
+
+	/* create buffer */
+	buffer = (char *)malloc(sizeof(char) * max_size);
+	if (buffer == NULL)
+	{
+		char *msg = "Error: Can't write to %s\n";
+
+		print_error(file_to, msg, 99);
+	}
+	/* open the input file and output file */
+	fd_from = open(file_from, O_RDONLY);
+	check(fd_from, file_from, 98);
+
+	file_perm = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
+	fd_to = open(file_to, O_WRONLY | O_CREAT | O_TRUNC, file_perm);
+	check(fd_to, file_to, 99);
+
+	/* read from file */
+	r = read(fd_from, buffer, max_size);
+	check(r, file_from, 98);
+
+	while (r > 0)
+	{
+		/* write to output file */
+		w = write(fd_to, buffer, r);
+		check(w, file_to, 99);
+
+		/* read again from_file if content size > max_zise */
+		r = read(fd_from, buffer, max_size);
+		check(r, file_from, 98);
+		fd_to = open(file_to, O_WRONLY | O_APPEND);
+		check(fd_to, file_to, 99);
+	}
+
+	close_file(fd_from);
+	close_file(fd_to);
 }
 
 /**
@@ -72,44 +126,9 @@ void close_file(int fd)
  */
 int main(int argc, char *argv[])
 {
-	int from, to, r, w, max_size = 1024;
-	char *buffer, *msg;
-
 	if (argc != 3)
-	{
 		print_error(NULL, "Usage: cp file_from file_to\n", 97);
-	}
-
-	buffer = _buffer(argv[2], max_size);
-	from = open(argv[1], O_RDONLY);
-	r = read(from, buffer, max_size);
-	to = open(argv[2], O_WRONLY | O_TRUNC);
-	if (to == -1)
-		to = open(argv[2], O_CREAT | O_WRONLY, 0664);
-
-	do {
-		if (from == -1 || r == -1)
-		{
-			free(buffer);
-			print_error(argv[1], "Error: Can't read from file %s\n", 98);
-		}
-
-		w = write(to, buffer, r);
-		if (to == -1 || w == -1)
-		{
-			free(buffer);
-			msg = "Error: Can't write to %s\n";
-			print_error(argv[2], msg, 99);
-		}
-
-		r = read(from, buffer, max_size);
-		to = open(argv[2], O_WRONLY | O_APPEND);
-
-	} while (r > 0);
-
-	free(buffer);
-	close_file(from);
-	close_file(to);
+	copy_file(argv[1], argv[2]);
 
 	return (0);
 }
