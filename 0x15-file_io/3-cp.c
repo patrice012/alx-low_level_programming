@@ -89,7 +89,7 @@ void copy_file(char *file_from, char *file_to)
 
 		print_error(file_to, msg, 99);
 	}
-	/* open the input file and output file */
+	/* open the input and output files */
 	fd_from = open(file_from, O_RDONLY);
 	check(fd_from, file_from, 98);
 
@@ -110,10 +110,11 @@ void copy_file(char *file_from, char *file_to)
 		/* read again from_file if content size > max_zise */
 		r = read(fd_from, buffer, max_size);
 		check(r, file_from, 98);
+		/* open the file to  append content */
 		fd_to = open(file_to, O_WRONLY | O_APPEND);
 		check(fd_to, file_to, 99);
 	}
-
+	free(buffer);
 	close_file(fd_from);
 	close_file(fd_to);
 }
@@ -127,7 +128,7 @@ void copy_file(char *file_from, char *file_to)
 int main(int argc, char *argv[])
 {
 	if (argc != 3)
-		print_error(NULL, "Usage: cp file_from file_to\n", 97);
+		print_error(NULL, "Usage: cp file_from file_to", 97);
 	copy_file(argv[1], argv[2]);
 
 	return (0);
