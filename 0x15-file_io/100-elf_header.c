@@ -80,7 +80,7 @@ void _print_magic(unsigned char *e_ident)
 	printf("  Magic:  ");
 	for (i = 0; i < EI_NIDENT; i++)
 		printf(" %02x", e_ident[i]);
-	_printf("\n");
+	printf("\n");
 }
 
 /**
@@ -98,8 +98,8 @@ void _print_class(unsigned char *e_ident)
 	else if (e_ident[EI_CLASS] == ELFCLASS64)
 		printf("ELF64");
 	else
-		_printf("<unknown: %x>", e_ident[EI_CLASS]);
-	_printf("\n");
+		printf("<unknown: %x>", e_ident[EI_CLASS]);
+	printf("\n");
 }
 
 /**
@@ -226,7 +226,7 @@ void _print_type(uint16_t e_type, unsigned char *e_ident)
  */
 void _print_entry(unsigned long int e_entry, unsigned char *e_ident)
 {
-	_printf("  Entry point address:               ");
+	printf("  Entry point address:               ");
 
 	if (e_ident[EI_DATA] == ELFDATA2MSB)
 	{
@@ -236,10 +236,10 @@ void _print_entry(unsigned long int e_entry, unsigned char *e_ident)
 	}
 
 	if (e_ident[EI_CLASS] == ELFCLASS32)
-		_printf("%#x\n", (unsigned int)e_entry);
+		printf("%#x\n", (unsigned int)e_entry);
 
 	else
-		_printf("%#lx\n", e_entry);
+		printf("%#lx\n", e_entry);
 }
 
 /**
@@ -260,7 +260,7 @@ void _print_elf_header(char *filename)
 	if (!isElf(header.e_ident))
 		check(-1, filename, fd, 3);
 
-	_printf("ELF Header:\n");
+	printf("ELF Header:\n");
 	_print_magic(header.e_ident);
 	_print_class(header.e_ident);
 	_print_data(header.e_ident);
