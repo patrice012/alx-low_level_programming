@@ -9,15 +9,14 @@
 #endif
 
 /**
- * close_fd - closes file descriptor
+ * close_file - closes file descriptor
  *
  * @fd: The file descriptor of the ELF file
  */
-void close_fd(int fd)
+void close_file(int fd)
 {
 	if (close(fd) == -1)
 	{
-
 		dprintf(STDERR_FILENO, "ERROR: Couldn't close file\n");
 		exit(98);
 	}
@@ -37,7 +36,7 @@ void check(int value, char *filename, int fd, int error_code)
 		return;
 
 	if (fd != -1)
-		close_fd(fd);
+		close_file(fd);
 
 	if (error_code == 1)
 		dprintf(STDERR_FILENO, "ERROR: couldn't open %s\n", filename);
@@ -69,26 +68,29 @@ int isElf(unsigned char *e_ident)
 }
 
 /**
- * print_magic - prints the magic numbers of ELF file
+ * _print_magic - prints the magic numbers of ELF file
  *
  * @e_ident: the e_idnet of the file
  */
-void print_magic(unsigned char *e_ident)
+void _print_magic(unsigned char *e_ident)
 {
-	int i;
+	int i = 0;
 
 	printf("  Magic:  ");
-	for (i = 0; i < EI_NIDENT; i++)
+	while (i < EI_NIDENT)
+	{
 		printf(" %02x", e_ident[i]);
-	printf("\n");
+		printf("\n");
+		i++;
+	}
 }
 
 /**
- * print_class - prints the class of ELF File
+ * _print_class - prints the class of ELF File
  *
  * @e_ident: the e_ident of the file
  */
-void print_class(unsigned char *e_ident)
+void _print_class(unsigned char *e_ident)
 {
 	printf("  Class:                             ");
 	if (e_ident[EI_CLASS] == ELFCLASSNONE)
@@ -103,11 +105,11 @@ void print_class(unsigned char *e_ident)
 }
 
 /**
- * print_data - prints the data format of elf header
+ * _print_data - prints the data format of elf header
  *
- * @e_ident: the ident of the file
+ * @e_ident: the e_ident of the file
  */
-void print_data(unsigned char *e_ident)
+void _print_data(unsigned char *e_ident)
 {
 	printf("  Data:                              ");
 	if (e_ident[EI_DATA] == ELFDATANONE)
@@ -122,11 +124,11 @@ void print_data(unsigned char *e_ident)
 }
 
 /**
- * print_version - version number of the ELF  specification
+ * _print_version - version number of the ELF  specification
  *
- * @e_ident: the ident of the file
+ * @e_ident: the e_ident of the file
  */
-void print_version(unsigned char *e_ident)
+void _print_version(unsigned char *e_ident)
 {
 	printf("  Version:                           %d",
 		e_ident[EI_VERSION]);
@@ -136,11 +138,11 @@ void print_version(unsigned char *e_ident)
 }
 
 /**
- * print_osapi - operating system and ABI to which the object is targeted.
+ * _print_osapi - operating system and ABI to which the object is targeted.
  *
  * @e_ident: e_ident of file
  */
-void print_osapi(unsigned char *e_ident)
+void _print_osapi(unsigned char *e_ident)
 {
 	printf("  OS/ABI:                            ");
 	switch (e_ident[EI_OSABI])
@@ -181,23 +183,23 @@ void print_osapi(unsigned char *e_ident)
 }
 
 /**
- * print_apiv - the version of the ABI to which the object is targeted.
+ * _print_apiv - the version of the ABI to which the object is targeted.
  *
- * @e_ident: the ident of the file
+ * @e_ident: the e_ident of the file
  */
-void print_apiv(unsigned char *e_ident)
+void _print_apiv(unsigned char *e_ident)
 {
 	printf("  ABI Version:                       %d\n",
 			e_ident[EI_ABIVERSION]);
 }
 
 /**
- * print_type - the object file type
+ * _print_type - the object file type
  *
  * @e_type: the type of the file
- * @e_ident: the ident of the file
+ * @e_ident: the e_ident of the file
  */
-void print_type(uint16_t e_type, unsigned char *e_ident)
+void _print_type(uint16_t e_type, unsigned char *e_ident)
 {
 	if (e_ident[EI_DATA] == ELFDATA2MSB)
 		e_type >>= 8;
@@ -218,13 +220,13 @@ void print_type(uint16_t e_type, unsigned char *e_ident)
 }
 
 /**
- * print_entry - prints the virtual address to which the system  first
+ * _print_entry - prints the virtual address to which the system  first
  * transfers  control,  thus starting the process.
  *
  * @e_entry: entry point address
- * @e_ident: the ident of file
+ * @e_ident: the e_ident of file
  */
-void print_entry(unsigned long int e_entry, unsigned char *e_ident)
+void _print_entry(unsigned long int e_entry, unsigned char *e_ident)
 {
 	printf("  Entry point address:               ");
 
@@ -261,16 +263,16 @@ void print_elf_header(char *filename)
 		check(-1, filename, fd, 3);
 
 	printf("ELF Header:\n");
-	print_magic(header.e_ident);
-	print_class(header.e_ident);
-	print_data(header.e_ident);
-	print_version(header.e_ident);
-	print_osapi(header.e_ident);
-	print_apiv(header.e_ident);
-	print_type(header.e_type, header.e_ident);
-	print_entry(header.e_entry, header.e_ident);
+	_print_magic(header.e_ident);
+	_print_class(header.e_ident);
+	_print_data(header.e_ident);
+	_print_version(header.e_ident);
+	_print_osapi(header.e_ident);
+	_print_apiv(header.e_ident);
+	_print_type(header.e_type, header.e_ident);
+	_print_entry(header.e_entry, header.e_ident);
 
-	close_fd(fd);
+	close_file(fd);
 }
 
 /**
