@@ -9,15 +9,16 @@
 #endif
 
 /**
- * close_file - closes file descriptor
+ * close_fd - closes file descriptor
  *
  * @fd: The file descriptor of the ELF file
  */
-void close_file(int fd)
+void close_fd(int fd)
 {
 	if (close(fd) == -1)
 	{
-		dprintf(STDERR_FILENO, "ERROR: Couldn't close file\n");
+
+		d_printf(STDERR_FILENO, "ERROR: Couldn't close file\n");
 		exit(98);
 	}
 }
@@ -36,14 +37,14 @@ void check(int value, char *filename, int fd, int error_code)
 		return;
 
 	if (fd != -1)
-		close_file(fd);
+		close_fd(fd);
 
 	if (error_code == 1)
-		dprintf(STDERR_FILENO, "ERROR: couldn't open %s\n", filename);
+		d_printf(STDERR_FILENO, "ERROR: couldn't open %s\n", filename);
 	else if (error_code == 2)
-		dprintf(STDERR_FILENO, "ERROR: couldn't read %s\n", filename);
+		d_printf(STDERR_FILENO, "ERROR: couldn't read %s\n", filename);
 	else if (error_code == 3)
-		dprintf(STDERR_FILENO, "ERROR: %s is not an ELF File\n", filename);
+		d_printf(STDERR_FILENO, "ERROR: %s is not an ELF File\n", filename);
 
 	exit(98);
 }
@@ -68,25 +69,22 @@ int isElf(unsigned char *e_ident)
 }
 
 /**
- * _print_magic - prints the magic numbers of ELF file
+ * _print_magic - _prints the magic numbers of ELF file
  *
  * @e_ident: the e_idnet of the file
  */
 void _print_magic(unsigned char *e_ident)
 {
-	int i = 0;
+	int i;
 
 	printf("  Magic:  ");
-	while (i < EI_NIDENT)
-	{
+	for (i = 0; i < EI_NIDENT; i++)
 		printf(" %02x", e_ident[i]);
-		printf("\n");
-		i++;
-	}
+	_printf("\n");
 }
 
 /**
- * _print_class - prints the class of ELF File
+ * _print_class - _prints the class of ELF File
  *
  * @e_ident: the e_ident of the file
  */
@@ -100,14 +98,14 @@ void _print_class(unsigned char *e_ident)
 	else if (e_ident[EI_CLASS] == ELFCLASS64)
 		printf("ELF64");
 	else
-		printf("<unknown: %x>", e_ident[EI_CLASS]);
-	printf("\n");
+		_printf("<unknown: %x>", e_ident[EI_CLASS]);
+	_printf("\n");
 }
 
 /**
- * _print_data - prints the data format of elf header
+ * _print_data - _prints the data format of elf header
  *
- * @e_ident: the e_ident of the file
+ * @e_ident: the ident of the file
  */
 void _print_data(unsigned char *e_ident)
 {
@@ -126,7 +124,7 @@ void _print_data(unsigned char *e_ident)
 /**
  * _print_version - version number of the ELF  specification
  *
- * @e_ident: the e_ident of the file
+ * @e_ident: the ident of the file
  */
 void _print_version(unsigned char *e_ident)
 {
@@ -185,7 +183,7 @@ void _print_osapi(unsigned char *e_ident)
 /**
  * _print_apiv - the version of the ABI to which the object is targeted.
  *
- * @e_ident: the e_ident of the file
+ * @e_ident: the ident of the file
  */
 void _print_apiv(unsigned char *e_ident)
 {
@@ -197,7 +195,7 @@ void _print_apiv(unsigned char *e_ident)
  * _print_type - the object file type
  *
  * @e_type: the type of the file
- * @e_ident: the e_ident of the file
+ * @e_ident: the ident of the file
  */
 void _print_type(uint16_t e_type, unsigned char *e_ident)
 {
@@ -220,15 +218,15 @@ void _print_type(uint16_t e_type, unsigned char *e_ident)
 }
 
 /**
- * _print_entry - prints the virtual address to which the system  first
+ * _print_entry - _prints the virtual address to which the system  first
  * transfers  control,  thus starting the process.
  *
  * @e_entry: entry point address
- * @e_ident: the e_ident of file
+ * @e_ident: the ident of file
  */
 void _print_entry(unsigned long int e_entry, unsigned char *e_ident)
 {
-	printf("  Entry point address:               ");
+	_printf("  Entry point address:               ");
 
 	if (e_ident[EI_DATA] == ELFDATA2MSB)
 	{
@@ -238,18 +236,18 @@ void _print_entry(unsigned long int e_entry, unsigned char *e_ident)
 	}
 
 	if (e_ident[EI_CLASS] == ELFCLASS32)
-		printf("%#x\n", (unsigned int)e_entry);
+		_printf("%#x\n", (unsigned int)e_entry);
 
 	else
-		printf("%#lx\n", e_entry);
+		_printf("%#lx\n", e_entry);
 }
 
 /**
- * print_elf_header - extracts elf header from elf files
+ * _print_elf_header - extracts elf header from elf files
  *
  * @filename: string - name of the file
  */
-void print_elf_header(char *filename)
+void _print_elf_header(char *filename)
 {
 	ElfW(Ehdr) header;
 	int fd = open(filename, O_RDONLY), r;
@@ -262,7 +260,7 @@ void print_elf_header(char *filename)
 	if (!isElf(header.e_ident))
 		check(-1, filename, fd, 3);
 
-	printf("ELF Header:\n");
+	_printf("ELF Header:\n");
 	_print_magic(header.e_ident);
 	_print_class(header.e_ident);
 	_print_data(header.e_ident);
@@ -272,7 +270,7 @@ void print_elf_header(char *filename)
 	_print_type(header.e_type, header.e_ident);
 	_print_entry(header.e_entry, header.e_ident);
 
-	close_file(fd);
+	close_fd(fd);
 }
 
 /**
@@ -286,6 +284,6 @@ void print_elf_header(char *filename)
 int main(int argc, char **argv)
 {
 	(void)argc;
-	print_elf_header(argv[1]);
+	_print_elf_header(argv[1]);
 	return (0);
 }
