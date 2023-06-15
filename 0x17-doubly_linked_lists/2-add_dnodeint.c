@@ -9,19 +9,28 @@
 
 dlistint_t *add_dnodeint(dlistint_t **head, const int n)
 {
-	/* create and set new node data */
-	dlistint_t *node = (dlistint_t *)malloc(sizeof(dlistint_t));
+	dlistint_t *new_node, *temp;
 
-	if (node)
+	new_node = malloc(sizeof(dlistint_t));
+	temp = *head;
+
+	if (new_node)
 		return (NULL);
-	node->n = n;
-	node->next = *head;
-	node->prev = NULL;
+	new_node->n = n;
+	new_node->prev = NULL;
 
-	if (*head != NULL)
-		(*head)->prev = node;
-	/* insert at the first place */
-	*head = node;
-	return (node);
+	if (temp != NULL)
+	{
+		while (temp->prev != NULL)
+			temp = temp->prev;
+	}
+
+	new_node->next = temp;
+
+	if (temp != NULL)
+		temp->prev = new_node;
+	*head = new_node;
+	printf("func");
+	return (new_node);
 }
 
