@@ -5,6 +5,7 @@
   * @h: head of the list
   * @idx: index of the element to insert
   * @n: new node data
+  * Return: the new node
   */
 
 dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
