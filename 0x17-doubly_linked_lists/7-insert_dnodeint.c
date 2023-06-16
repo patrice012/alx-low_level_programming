@@ -1,5 +1,7 @@
 #include "lists.h"
 
+void _insert(dlistint_t **node, dlistint_t **temp);
+
 /**
   * insert_dnodeint_at_index - insert at any position
   * @h: head of the list
@@ -33,14 +35,32 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 	{
 		if (idx == count)
 		{
-			node->next = temp;
-			node->prev = temp->prev;
-			temp->prev->next = node;
-			temp->prev = node;
+			_insert(&node, &temp);
 			return (node);
 		}
 		temp = temp->next;
 		count++;
 	}
+	if (idx == count)
+	{
+		_insert(&node, &temp);
+		return (node);
+	}
+	free(node);
 	return (NULL);
+}
+
+
+/**
+  * _insert - helper function
+  * @node: node to insert
+  * @temp: current element
+  */
+
+void _insert(dlistint_t **node, dlistint_t **temp)
+{
+	(*node)->next = *temp;
+	(*node)->prev = (*temp)->prev;
+	(*temp)->prev->next = *node;
+	(*temp)->prev = *node;
 }
