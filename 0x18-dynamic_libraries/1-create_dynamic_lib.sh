@@ -18,6 +18,3 @@ else
 fi
 
 gcc -shared -o "$name" *.o
-
-# Clean up object files
-rm *.o
