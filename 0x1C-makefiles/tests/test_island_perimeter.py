@@ -72,7 +72,7 @@ class TestIslandPerimeter(unittest.TestCase):
             [0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         ]
-        self.assertNotEqual(18, island_perimeter(grid))
+        self.assertEqual(18, island_perimeter(grid))
 
 
 if __name__ == "__main__":
