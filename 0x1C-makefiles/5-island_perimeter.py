@@ -15,24 +15,19 @@ def island_perimeter(grid):
     Raises:
         ValueError: if `grid` is not a list of list
     """
-    # if type(grid) is not list:
-    #     raise TypeError("grid must be a list")
-    # if not all(([type(i) == list for i in grid])):
-    #     raise TypeError("grid's elements must be a list")
+    if type(grid) is not list:
+        raise TypeError("grid must be a list")
+    if not all(([type(i) == list for i in grid])):
+        raise TypeError("grid's elements must be a list")
+
     perimeter = 0
-    for idx, row in enumerate(grid):
-        for idx_2, value in enumerate(row):
-            if value != 1:
-                continue
-            if idx_2 + 1 < len(row) and grid[idx][idx_2 + 1] == 0:
-                perimeter += 1
-
-            if idx_2 - 1 >= 0 and grid[idx][idx_2 - 1] == 0:
-                perimeter += 1
-
-            if idx - 1 >= 0 and grid[idx - 1][idx_2] == 0:
-                perimeter += 1
-
-            if idx + 1 < len(grid) and grid[idx + 1][idx_2] == 0:
-                perimeter += 1
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            if grid[i][j] == 1:
+                perimeter += 4
+                if i > 0 and grid[i - 1][j] == 1:
+                    perimeter -= 2
+                if j > 0 and grid[i][j - 1] == 1:
+                    perimeter -= 2
+    
     return perimeter

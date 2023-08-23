@@ -48,7 +48,7 @@ class TestIslandPerimeter(unittest.TestCase):
             [1, 1, 1, 1],
             [1, 1, 1, 1],
         ]
-        self.assertEqual(0, island_perimeter(grid))
+        self.assertEqual(16, island_perimeter(grid))
 
     def test_Grid_is_completely_surrounded_by_water(self):
         grid = [
@@ -72,7 +72,7 @@ class TestIslandPerimeter(unittest.TestCase):
             [0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         ]
-        self.assertEqual(18, island_perimeter(grid))
+        self.assertEqual(38, island_perimeter(grid))
 
 
 if __name__ == "__main__":
